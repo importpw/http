@@ -1,4 +1,4 @@
-import tcp@0.0.1
+import tcp@0.0.2
 
 BASHTTPD=$(print=1 import ./bashttpd.sh)
 chmod +x "$BASHTTPD"
