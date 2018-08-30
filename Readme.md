@@ -22,5 +22,5 @@ hello world
 
 ## Credits
 
-HTTP server implementation based off of
+HTTP server implementation is based off of
 [`avleen/bashttpd`](https://github.com/avleen/bashttpd).
