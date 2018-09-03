@@ -8,8 +8,6 @@
 # Reworked by:     Josh Cartwright, 2012
 # Reworked by:     Nathan Rajlich, 2018
 
-conf="${BASHTTPD_CONFIG-bashttpd.conf}"
-
 recv() { echo "<" "$@" >&2; }
 send() { echo ">" "$@" >&2;
          printf "%s\r\n" "$*"; }
@@ -245,8 +243,4 @@ parse_request_body() {
   fi
 }
 
-run_user_code() {
-  source "${conf}"
-}
-
-parse_request_body | run_user_code | flush_response
+parse_request_body | "$@" | flush_response
