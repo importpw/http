@@ -78,7 +78,7 @@ http_response_flush() {
           ;;
         H)
           name="$(echo "$data" | cut -d' ' -f1)"
-          headers["$name"]="${data:$(( "${#name}" + 1 ))}"
+          headers["$name"]="${data:$(( ${#name} + 1 ))}"
           ;;
       esac
     else
