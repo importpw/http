@@ -1,7 +1,19 @@
 #!/bin/bash
 set -euo pipefail
 . "$(which import)"
+import "assert@2.1.3"
 . "./response.sh"
+
+
+assert_equal "$(http_response_code 201)" $'\1'"C201"
+assert_equal "$(http_response_code 404)" $'\1'"C404"
+
+
+assert_equal "$(http_response_header "X-Foo:bar:baz")" $'\1'"HX-Foo bar:baz"
+assert_equal "$(http_response_header "X-Foo: bar:baz")" $'\1'"HX-Foo bar:baz"
+assert_equal "$(http_response_header "X-Foo" "bar:baz")" $'\1'"HX-Foo bar:baz"
+assert_equal "$(http_response_header "X-Foo" "bar" "baz")" $'\1'"HX-Foo bar baz"
+
 
 GATEWAY_INTERFACE=CGI/1.1
 HTTPS=on
@@ -30,8 +42,8 @@ SERVER_PROTOCOL=HTTP/1.1
 SERVER_SOFTWARE=import/http
 
 serve() {
-  http_response_status_code 201
-  http_response_set_header "X-Foo" "bar baz"
+  http_response_code 201
+  http_response_header "X-Foo: bar baz"
   echo hi
 }
 
