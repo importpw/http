@@ -1,8 +1,8 @@
-import tcp@0.0.2
+import "tcp@0.0.2"
 
-BASHTTPD=$(print=1 import ./bashttpd.sh)
-chmod +x "$BASHTTPD"
+SERVER="$(print=1 import "./server.sh")"
+chmod +x "$SERVER"
 
 http_server() {
-  tcp_server "$BASHTTPD" "$@"
+  tcp_server "$SERVER" "$@"
 }
